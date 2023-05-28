@@ -1,6 +1,6 @@
 import pytest
 from selenium import webdriver
-from locators import MainPageLocators, AccountPageLocators, BurgerBuilderPageLocators
+from Sprint_3.locators import *
 
 
 def test_go_to_account_page(browser):

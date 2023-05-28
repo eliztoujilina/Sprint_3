@@ -1,10 +1,5 @@
 from time import sleep
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-from locators import *
+from Sprint_3.locators import *
 
 
 def test_log_out(browser):

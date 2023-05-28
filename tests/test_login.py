@@ -2,7 +2,8 @@ import time
 
 import pytest
 from selenium import webdriver
-from locators import MainPageLocators, LoginPageLocators, AccountPageLocators, RegistrationPageLocators, RestorePass
+
+from Sprint_3.locators import *
 
 
 def test_login_from_main_page(browser):
