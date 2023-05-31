@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from Sprint_3.locators import *
 import string
+from Sprint_3.helpers.custom_wait import *
 
 
 @pytest.fixture
@@ -45,9 +46,8 @@ def test_successful_registration(browser: webdriver, get_email):
     # Нажатие на кнопку "Зарегистрироваться"
     register_button = browser.find_element(*RegistrationPageLocators.REGISTER_BUTTON)
     register_button.click()
-    time.sleep(1)
     # Проверка успешной регистрации
-    assert browser.current_url == "https://stellarburgers.nomoreparties.site/login"
+    assert url_should_have(browser, "https://stellarburgers.nomoreparties.site/login")
     login_button = browser.find_element(*LoginPageLocators.LOGIN_BUTTON)
     assert login_button.is_displayed()
 

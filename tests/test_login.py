@@ -1,7 +1,12 @@
 import time
+from lib2to3.pgen2 import driver
+from telnetlib import EC
 
 import pytest
 from selenium import webdriver
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from Sprint_3.helpers.custom_wait import *
 
 from Sprint_3.locators import *
 
@@ -23,9 +28,8 @@ def test_login_from_main_page(browser):
     # Нажатие на кнопку "Войти"
     login_button = browser.find_element(*LoginPageLocators.LOGIN_BUTTON)
     login_button.click()
-    time.sleep(1)
     # Проверка успешного входа
-    assert browser.current_url == "https://stellarburgers.nomoreparties.site/"
+    assert url_should_have(browser, "https://stellarburgers.nomoreparties.site/", timeout=3)
 
 def test_login_from_account_page(browser):
     browser.get("https://stellarburgers.nomoreparties.site/")
@@ -47,8 +51,7 @@ def test_login_from_account_page(browser):
     time.sleep(1)
     # Проверка успешного входа
     account_button.click()
-    time.sleep(2)
-    assert browser.current_url == "https://stellarburgers.nomoreparties.site/account/profile"
+    assert url_should_have(browser, "https://stellarburgers.nomoreparties.site/account/profile")
 
 def test_click_login_in_btn_in_register_page(browser):
     browser.get("https://stellarburgers.nomoreparties.site/")
@@ -63,7 +66,7 @@ def test_click_login_in_btn_in_register_page(browser):
     login_link = browser.find_element(*RegistrationPageLocators.LOGIN_LINK)
     login_link.click()
 
-    assert browser.current_url == "https://stellarburgers.nomoreparties.site/login"
+    assert url_should_have(browser, "https://stellarburgers.nomoreparties.site/login")
 
 
 def test_login_from_password_recovery_page(browser):
@@ -84,7 +87,6 @@ def test_login_from_password_recovery_page(browser):
     # Нажатие на кнопку "Войти"
     restor_button = browser.find_element(*RestorePass.RESTORE_BUTTON)
     restor_button.click()
-    time.sleep(2)
     # Проверка успешного входа
 
-    assert browser.current_url == 'https://stellarburgers.nomoreparties.site/reset-password'
+    assert url_should_have(browser, 'https://stellarburgers.nomoreparties.site/reset-password')
