@@ -8,6 +8,9 @@ from selenium.webdriver.common.keys import Keys
 from Sprint_3.locators import *
 import string
 from Sprint_3.helpers.custom_wait import *
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 
 @pytest.fixture
@@ -46,10 +49,23 @@ def test_successful_registration(browser: webdriver, get_email):
     # Нажатие на кнопку "Зарегистрироваться"
     register_button = browser.find_element(*RegistrationPageLocators.REGISTER_BUTTON)
     register_button.click()
+
     # Проверка успешной регистрации
-    assert url_should_have(browser, "https://stellarburgers.nomoreparties.site/login")
+    WebDriverWait(browser, 5).until(EC.element_to_be_clickable((LoginPageLocators.LOGIN_BUTTON)))
+
+    email_input = WebDriverWait(browser, 3).until(EC.presence_of_element_located((RegistrationPageLocators.EMAIL_INPUT)))
+    email_input.send_keys(get_email)
+
+    password_input = WebDriverWait(browser, 3).until(EC.presence_of_element_located((RegistrationPageLocators.PASSWORD_INPUT)))
+    password_input.send_keys("hello111")
+
+    # Нажатие на кнопку "Войти"
     login_button = browser.find_element(*LoginPageLocators.LOGIN_BUTTON)
-    assert login_button.is_displayed()
+    login_button.click()
+    account_btn = browser.find_element(*MainPageLocators.ACCOUNT_BUTTON)
+    account_btn.click()
+    assert url_should_have(browser, "profile")
+
 
 
 def test_invalid_password(browser):

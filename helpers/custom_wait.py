@@ -2,10 +2,10 @@ from selenium import webdriver
 from time import sleep
 
 
-def url_should_have(browser, current_url: str, timeout: int= 5):
+def url_should_have(browser: webdriver.Chrome, current_url: str, timeout: int= 5):
     time_spend = 0
     for i in range(timeout):
-        if browser.current_url == current_url:
+        if current_url in browser.current_url:
             return True
         else:
             if time_spend <= timeout:

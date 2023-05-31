@@ -21,10 +21,10 @@ def test_log_out(browser):
     # Нажатие на кнопки "Войти" и "Выйти"
     login_button = browser.find_element(*LoginPageLocators.LOGIN_BUTTON)
     login_button.click()
-    account_btn = WebDriverWait(driver=browser, timeout=5).until(EC.presence_of_element_located(*MainPageLocators.ACCOUNT_BUTTON))
+    account_btn = WebDriverWait(driver=browser, timeout=5).until(EC.presence_of_element_located((MainPageLocators.ACCOUNT_BUTTON)))
     account_btn.click()
-    logout_btn = browser.find_element(*AccountPageLocators.LOGOUT_BUTTON)
-    logout_btn = WebDriverWait(driver=browser, timeout=5).until(EC.presence_of_element_located(*AccountPageLocators.LOGOUT_BUTTON))
+    logout_btn = WebDriverWait(driver=browser, timeout=5).until(EC.presence_of_element_located((AccountPageLocators.LOGOUT_BUTTON)))
     logout_btn.click()
-    sleep(2)
-    assert browser.current_url == "https://stellarburgers.nomoreparties.site/login"
+    account_btn = browser.find_element(*MainPageLocators.ACCOUNT_BUTTON)
+    account_btn.click()
+    assert url_should_have(browser, "https://stellarburgers.nomoreparties.site/login")
