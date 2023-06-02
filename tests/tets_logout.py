@@ -1,6 +1,6 @@
 from time import sleep
 from Sprint_3.locators import *
-from Sprint_3.helpers.custom_wait import *
+from helpers.custom_wait import *
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -21,10 +21,9 @@ def test_log_out(browser):
     # Нажатие на кнопки "Войти" и "Выйти"
     login_button = browser.find_element(*LoginPageLocators.LOGIN_BUTTON)
     login_button.click()
+    locator = '//p[text()="Личный Кабинет"]/..'
     account_btn = WebDriverWait(driver=browser, timeout=5).until(EC.presence_of_element_located((MainPageLocators.ACCOUNT_BUTTON)))
     account_btn.click()
     logout_btn = WebDriverWait(driver=browser, timeout=5).until(EC.presence_of_element_located((AccountPageLocators.LOGOUT_BUTTON)))
     logout_btn.click()
-    account_btn = browser.find_element(*MainPageLocators.ACCOUNT_BUTTON)
-    account_btn.click()
     assert url_should_have(browser, "https://stellarburgers.nomoreparties.site/login")

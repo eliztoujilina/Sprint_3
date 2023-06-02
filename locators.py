@@ -31,3 +31,6 @@ class BurgerBuilderPageLocators:
     BUNS_SECTION = (By.XPATH, '//span[text()="Булки"]/..') # вкладка "Булки"
     SAUCES_SECTION = (By.XPATH,'//span[text()="Соусы"]/..') # вкладка "Соусы"
     FILLINGS_SECTION = (By.XPATH, '//span[text()="Начинки"]/..') # вкладка "Начинки"
+
+class PersonalAccountLocators:
+    LOGIN_FIELD = (By.XPATH, "//label[text()='Логин']/following-sibling::input")
